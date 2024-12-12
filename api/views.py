@@ -1,15 +1,16 @@
-from django.shortcuts import render
+from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
 from .models import User
-from .serializer import UserSerializer
 
-# Create your views here.
-
-# 
 @api_view(['GET'])
 def get_user(request):
-    users = User.objects.all()
-    serializer = UserSerializer(users, many=True)
-    return Response(serializer.data)
+    return Response({"message": "API is working!"})
+
+@api_view(['GET'])
+def api_root(request):
+    return Response({
+        "status": "success",
+        "message": "Welcome to the Gamify API",
+        "version": "1.0.0"
+    })

@@ -10,7 +10,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth.models import User
-from .serializers import CustomTokenObtainPairSerializer
+from .serializer import CustomTokenObtainPairSerializer
+from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 
@@ -35,3 +36,9 @@ class RegisterView(APIView):
         
         user = User.objects.create_user(username=username, email=email, password=password)
         return Response({'message': 'User created successfully'}, status=status.HTTP_201_CREATED)
+
+class ProtectedView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        return Response({'message': 'You have accessed a protected route!'})

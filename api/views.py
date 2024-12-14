@@ -1,15 +1,14 @@
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import User
+from .models import *
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth.models import User
-from .serializer import CustomTokenObtainPairSerializer, UserSerializer
+from .serializer import *
 from rest_framework.permissions import IsAuthenticated
-
 
 @api_view(['GET'])
 def get_user(request):
@@ -55,3 +54,14 @@ class ProtectedView(APIView):
 
     def get(self, request):
         return Response({'message': 'You have accessed a protected route!'})
+    
+class LeaderboardView(APIView):
+    def get(self, request):
+        course_id = request.query_params.get('course_id')  # Get course ID from query parameters
+        if course_id:
+            leaderboard = Leaderboard.objects.filter(course_id=course_id)
+        else:
+            leaderboard = Leaderboard.objects.all()
+
+        serializer = LeaderboardSerializer(leaderboard, many=True)
+        return Response(serializer.data)

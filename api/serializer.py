@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User
+from .models import *
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
@@ -33,3 +33,18 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['email'] = user.email
 
         return token
+    
+class CourseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Course
+        fields = ['id', 'name']
+
+class UserCourseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserCourse
+        fields = ['id', 'user', 'progress']
+
+class LeaderboardSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Leaderboard
+        fields = ['rank', 'username', 'score', 'course', 'user_course']

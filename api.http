@@ -1,0 +1,35 @@
+###
+POST /token/ HTTP/1.1
+Host: localhost:8000
+Content-Type: application/json
+Content-Length: <length_of_payload>
+
+{
+    "username": "newuser",
+    "email": "newuser@example.com",
+    "password": "newpassword123"
+}
+
+###
+POST /register/ HTTP/1.1
+Host: localhost:8000
+Content-Type: application/json
+Content-Length: <length_of_payload>
+
+{
+    "username": "newuser2",
+    "email": "newuser2@example.com",
+    "password": "newpassword1234"
+}
+
+###
+GET /userlist/ HTTP/1.1
+Host: localhost:8000
+Content-Type: application/json
+Content-Length: <length_of_payload>
+
+### 
+GET /protected/ HTTP/1.1
+Host: localhost:8000
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM0MTQ0MDc1LCJpYXQiOjE3MzQxNDM3NzUsImp0aSI6ImE0ZjkwYTZiYzUwMzRjMTdhZDE0MzY1YjVkOWQxMmY4IiwidXNlcl9pZCI6MSwidXNlcm5hbWUiOiJuZXd1c2VyIiwiZW1haWwiOiJuZXd1c2VyQGV4YW1wbGUuY29tIn0.3KYtXN9PQsegMUwPbT-OGP9EFhKtDNqaHSvhI5a5VIE
+Content-Type: application/json

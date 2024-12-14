@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models import Avg
+from django.core.exceptions import ValidationError
 
 class User(AbstractUser):
     # AbstractUser already includes username, first_name, last_name, email, password
